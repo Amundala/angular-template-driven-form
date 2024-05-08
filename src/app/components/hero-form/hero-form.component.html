@@ -1,1 +1,36 @@
-<p>hero-form works!</p>
+{{ model | json }}
+<form #heroForm="ngForm">
+  <div>
+    <label for="name">Name</label>
+    <input
+      id="name"
+      class="border border-slate-700 p-2 rounded-md"
+      type="text"
+      required
+      name="name"
+      [(ngModel)]="model.name"
+    />
+  </div>
+  <div>
+    <label for="alterEgo"> Alter Ego</label>
+    <input
+      id="alterEgo"
+      class="border border-slate-700 p-2 rounded-md"
+      type="text"
+      name="alterEgo"
+      [(ngModel)]="model.alterEgo"
+    />
+  </div>
+  <div>
+    <label for="power">Hero Powers</label>
+    <select
+      id="power"
+      class="border border-slate-700 p-2 rounded-md"
+      name="power"
+      [(ngModel)]="model.power"
+      required
+    >
+      <option [value]="power" *ngFor="let power of powers">{{ power }}</option>
+    </select>
+  </div>
+</form>
