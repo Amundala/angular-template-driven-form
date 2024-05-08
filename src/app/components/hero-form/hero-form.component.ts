@@ -20,4 +20,9 @@ export class HeroFormComponent {
   onSubmit() {
     this.submitted = true;
   }
+
+  //--- create a hero method---
+  newHero() {
+    this.model = new Hero(42, '', '');
+  }
 }

@@ -1,36 +1,55 @@
 {{ model | json }}
-<form #heroForm="ngForm">
-  <div>
-    <label for="name">Name</label>
-    <input
-      id="name"
-      class="border border-slate-700 p-2 rounded-md"
-      type="text"
-      required
-      name="name"
-      [(ngModel)]="model.name"
-    />
-  </div>
-  <div>
-    <label for="alterEgo"> Alter Ego</label>
-    <input
-      id="alterEgo"
-      class="border border-slate-700 p-2 rounded-md"
-      type="text"
-      name="alterEgo"
-      [(ngModel)]="model.alterEgo"
-    />
-  </div>
-  <div>
-    <label for="power">Hero Powers</label>
-    <select
-      id="power"
-      class="border border-slate-700 p-2 rounded-md"
-      name="power"
-      [(ngModel)]="model.power"
-      required
-    >
-      <option [value]="power" *ngFor="let power of powers">{{ power }}</option>
-    </select>
-  </div>
-</form>
+<div [hidden]="submitted">
+  <h1>Hero Form</h1>
+  <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <div>
+      <label for="name">Name</label>
+      <input
+        id="name"
+        class="border border-slate-700 p-2 rounded-md"
+        type="text"
+        required
+        name="name"
+        [(ngModel)]="model.name"
+        #name="ngModel"
+      />
+    </div>
+    <div [hidden]="name.valid || name.pristine" class="bg-red-800 text-white">
+      Name is required
+    </div>
+    <div>
+      <label for="alterEgo"> Alter Ego</label>
+      <input
+        id="alterEgo"
+        class="border border-slate-700 p-2 rounded-md"
+        type="text"
+        name="alterEgo"
+        [(ngModel)]="model.alterEgo"
+      />
+    </div>
+    <div>
+      <label for="power">Hero Powers</label>
+      <select
+        id="power"
+        class="border border-slate-700 p-2 rounded-md"
+        name="power"
+        [(ngModel)]="model.power"
+        required
+      >
+        <option [value]="power" *ngFor="let power of powers">
+          {{ power }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <button
+        type="submit"
+        class="bg-red-950 text-white rounded-md p-2 mt-2"
+        (click)="newHero(); heroForm.reset()"
+        [disabled]="!heroForm.form.valid"
+      >
+        Add Hero
+      </button>
+    </div>
+  </form>
+</div>
